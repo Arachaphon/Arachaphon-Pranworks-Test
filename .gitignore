@@ -1,0 +1,12 @@
+# .NET
+bin/
+obj/
+*.user
+
+# Node/Frontend
+node_modules/
+dist/
+
+# OS/Editor
+.DS_Store
+.vscode/
