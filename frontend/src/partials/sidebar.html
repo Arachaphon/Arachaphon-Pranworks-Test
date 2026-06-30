@@ -667,6 +667,40 @@
           </li>
           <!-- Menu Item Ui Elements -->
 
+          <!-- Menu Item Student Location -->
+          <li>
+            <a
+              href="student-location.html"
+              @click="selected = (selected === 'StudentLocation' ? '':'StudentLocation')"
+              class="menu-item group"
+              :class=" (selected === 'StudentLocation') && (page === 'studentLocation') ? 'menu-item-active' : 'menu-item-inactive'"
+            >
+              <svg
+                :class="(selected === 'StudentLocation') && (page === 'studentLocation') ? 'menu-item-icon-active'  :'menu-item-icon-inactive'"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                  fill=""
+                />
+              </svg>
+
+              <span
+                class="menu-item-text"
+                :class="sidebarToggle ? 'lg:hidden' : ''"
+              >
+                Student Location
+              </span>
+            </a>
+          </li>
+          <!-- Menu Item Student Location -->
+
           <!-- Menu Item Authentication -->
           <li>
             <a

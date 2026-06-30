@@ -12,10 +12,12 @@ import chart01 from "./components/charts/chart-01";
 import chart02 from "./components/charts/chart-02";
 import chart03 from "./components/charts/chart-03";
 import map01 from "./components/map-01";
+import studentLocation from "./components/student-location";
 import "./components/calendar-init.js";
 import "./components/image-resize";
 
 Alpine.plugin(persist);
+Alpine.data("studentLocation", studentLocation);
 window.Alpine = Alpine;
 Alpine.start();
 
