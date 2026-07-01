@@ -276,6 +276,8 @@ layer(base);
   }
 }
 
+[x-cloak] { display: none !important; }
+
 @layer utilities {
   /* For Remove Date Icon */
   input[type="date"]::-webkit-inner-spin-button,

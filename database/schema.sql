@@ -5,7 +5,7 @@
 -- PK ทุกตาราง: AUTO_INCREMENT (running number)
 -- FK เชื่อมทุกตาราง: orders -> members, orders -> products
 -- ทุกตารางมี >= 5 columns
--- Data types ครบ: INT, NVARCHAR, BOOLEAN, DATETIME
+-- Data types ครบ: INT, VARCHAR, BOOLEAN, DATETIME
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS shop_db
@@ -19,10 +19,10 @@ USE shop_db;
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS members (
   member_id    INT           AUTO_INCREMENT PRIMARY KEY,
-  first_name   NVARCHAR(50)  NOT NULL,
-  last_name    NVARCHAR(50)  NOT NULL,
-  email        NVARCHAR(100) NOT NULL UNIQUE,
-  phone        NVARCHAR(20)  NULL,
+  first_name   VARCHAR(50)   NOT NULL,
+  last_name    VARCHAR(50)   NOT NULL,
+  email        VARCHAR(100)  NOT NULL UNIQUE,
+  phone        VARCHAR(20)   NULL,
   is_active    BOOLEAN       DEFAULT TRUE,
   created_at   DATETIME      DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS members (
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS products (
   product_id   INT            AUTO_INCREMENT PRIMARY KEY,
-  product_name NVARCHAR(100)  NOT NULL,
-  description  NVARCHAR(500)  NULL,
+  product_name VARCHAR(100)  NOT NULL,
+  description  VARCHAR(500)  NULL,
   price        DECIMAL(10,2)  NOT NULL,
   stock        INT            NOT NULL DEFAULT 0,
   is_available BOOLEAN        DEFAULT TRUE,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS orders (
   member_id        INT            NOT NULL,
   product_id       INT            NOT NULL,
   quantity         INT            NOT NULL DEFAULT 1,
-  shipping_address NVARCHAR(255)  NOT NULL,
+  shipping_address VARCHAR(255)  NOT NULL,
   total_amount     DECIMAL(12,2)  NOT NULL DEFAULT 0.00,
   is_paid          BOOLEAN        DEFAULT FALSE,
   order_date       DATETIME       DEFAULT CURRENT_TIMESTAMP,
