@@ -11,5 +11,4 @@ dist/
 # OS/Editor
 .DS_Store
 .vscode/
-
 *.txt
