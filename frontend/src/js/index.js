@@ -13,11 +13,13 @@ import chart02 from "./components/charts/chart-02";
 import chart03 from "./components/charts/chart-03";
 import map01 from "./components/map-01";
 import studentLocation from "./components/student-location";
+import imageSlider from "./components/image-slider";
 import "./components/calendar-init.js";
 import "./components/image-resize";
 
 Alpine.plugin(persist);
 Alpine.data("studentLocation", studentLocation);
+Alpine.data("imageSlider", imageSlider);
 window.Alpine = Alpine;
 Alpine.start();
 
