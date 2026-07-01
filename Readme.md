@@ -1,74 +1,145 @@
-# Intern Full Stack Developer Test
+# 🚀 Intern Full Stack Developer Test
 
-## โครงสร้างโปรเจค
-- `/frontend` - ข้อ 2 (TailAdmin Template)
-    2.1 /frontend
-    Template : TailAdmin - Free Tailwind Admin Dashboard Template
-    Source : https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template
-    2.2
-    *ApexCharts*
-    File: src/js/components/charts
+## 📁 Project Structure
 
-    *FullCalendar*
-    File: src/calendar.html , src/js/components/calendar-init.js
+| Directory | Description |
+|-----------|-------------|
+| `frontend/` | Frontend Assessment (Section 2) |
+| `backend/` | .NET 10 Minimal API (Section 3) |
+| `database/` | Database Schema & Mock Data (Section 4) |
 
-    *jsVectorMap*
-    File:  src/js/components/map-01.js
+---
 
-    *Flatpickr Date Range Picker*
-    File:  src/js/index.js, src/partials/datepicker.html
+# 2. Frontend
 
-    *Dropzone File Upload*
-    File:  src/js/index.js
+## 2.1 HTML Template
 
-    *Sidebar Toggled*
-    File:  src/partials/header.html, src/partials/sidebar.html
+| Item | Value |
+|------|-------|
+| Template | TailAdmin – Free Tailwind CSS Admin Dashboard |
+| Source | https://github.com/TailAdmin/tailadmin-free-tailwind-dashboard-template |
 
-    *Dark Mode Toggle*
-    File:  src/*.html , src/partials/header.html
+---
 
-    2.3 File : src/student-location.html,src/js/components/student-location.js
+## 2.2 JavaScript Components
 
-    2.4 Image Grid + Slider
+| Feature | File |
+|---------|------|
+| ApexCharts | `src/js/components/charts/` |
+| FullCalendar | `src/calendar.html`<br>`src/js/components/calendar-init.js` |
+| jsVectorMap | `src/js/components/map-01.js` |
+| Flatpickr Date Range Picker | `src/js/index.js`<br>`src/partials/datepicker.html` |
+| Dropzone File Upload | `src/js/index.js` |
+| Sidebar Toggle | `src/partials/header.html`<br>`src/partials/sidebar.html` |
+| Dark Mode Toggle | `src/*.html`<br>`src/partials/header.html` |
 
-- `/backend` - ข้อ 3 (.NET Core API)
-    3.1 Project (.NET 10 Minimal API)
-        File: backend/api/api.csproj (TargetFramework: net10.0)
-        File: backend/api/Program.cs (Minimal API, CORS, Swagger)
+---
 
-    3.2 Database Connection
-        File: backend/api/Program.cs:23-27 (AddDbContext with UseMySql)
-        File: backend/api/Data/AppDbContext.cs (DbSet Members, Products, Orders)
-        File: backend/api/appsettings.json:10 (ConnectionString: shop_db)
+## 2.3 Student Current Location
 
-    3.3 GET/POST API
-        GET /api/products/search (4 params: keyword, minPrice, maxPrice, isAvailable | 7 response fields)
-        File: backend/api/Program.cs:64-97
+**Files**
 
-        POST /api/members (4 body params: firstName, lastName, email, phone | 6 response fields)
-        File: backend/api/Program.cs:100-143
+```
+src/student-location.html
+src/js/components/student-location.js
+```
 
-        POST /api/orders (4 body params: memberId, productId, quantity, shippingAddress | 8 response fields)
-        File: backend/api/Program.cs:221-251
+---
 
-    3.4 Debug + Add Watch
-        GET /api/debug/order-flow (5 breakpoints, 5 watch variable groups)
-        File: backend/api/Program.cs:146-218
+## 2.4 Image Gallery
 
-- `/database` - ข้อ 4 (DB Schema + Mock Data)
-    4.1 DB Design
-        File: database/schema.sql (3 tables: members, products, orders)
-        File: backend/api/Data/AppDbContext.cs:14-66 (EF Core Fluent API mapping)
-        File: backend/api/Models/Member.cs, Product.cs, Order.cs (Entity Models)
+- Image Grid
+- Image Slider
 
-        - 3 tables ✓ (members, products, orders)
-        - PK running-number (AUTO_INCREMENT) ✓
-        - FK เชื่อม 3 ตาราง (orders.member_id → members, orders.product_id → products) ✓
-        - ≥5 columns per table: members(7), products(7), orders(8) ✓
-        - Data types: INT, VARCHAR (NVARCHAR equivalent + utf8mb4), BOOLEAN, DATETIME ✓
+---
 
-    4.2 Mock Data
-        File: database/mock_data.sql (50 records per table)
-        - members: 50 records ✓
-        - products: 50 records ✓
-        - orders: 50 records ✓
+# 3. Backend (.NET 10 Minimal API)
+
+## 3.1 Project Setup
+
+| Description | File |
+|------------|------|
+| .NET 10 Minimal API | `backend/api/api.csproj` |
+| Program Configuration | `backend/api/Program.cs` |
+
+---
+
+## 3.2 Database Connection
+
+| Description | File |
+|------------|------|
+| AddDbContext + MySQL | `backend/api/Program.cs` |
+| DbContext | `backend/api/Data/AppDbContext.cs` |
+| Connection String | `backend/api/appsettings.json` |
+
+---
+
+## 3.3 REST API
+
+### GET
+
+| Endpoint | Parameters | Response Fields |
+|----------|------------|----------------|
+| `/api/products/search` | keyword, minPrice, maxPrice, isAvailable | 7 |
+
+### POST
+
+| Endpoint | Parameters | Response Fields |
+|----------|------------|----------------|
+| `/api/members` | firstName, lastName, email, phone | 6 |
+| `/api/orders` | memberId, productId, quantity, shippingAddress | 8 |
+
+---
+
+## 3.4 Debug & Watch
+
+Endpoint
+
+```
+GET /api/debug/order-flow
+```
+
+- 5 Breakpoints
+- 5 Watch Variable Groups
+
+---
+
+# 4. Database
+
+## 4.1 Database Design
+
+### Files
+
+```
+database/schema.sql
+
+backend/api/Data/AppDbContext.cs
+
+backend/api/Models/
+├── Member.cs
+├── Product.cs
+└── Order.cs
+```
+
+### Requirements
+
+| Requirement | Status |
+|------------|:------:|
+| ≥ 3 Tables | ✅ |
+| Running Number PK | ✅ |
+| Foreign Keys | ✅ |
+| ≥ 5 Columns / Table | ✅ |
+| INT | ✅ |
+| NVARCHAR | ✅ |
+| BOOLEAN | ✅ |
+| DATETIME | ✅ |
+
+---
+
+## 4.2 Mock Data
+
+| Table | Records |
+|-------|:-------:|
+| Members | ✅ 50 |
+| Products | ✅ 50 |
+| Orders | ✅ 50 |
