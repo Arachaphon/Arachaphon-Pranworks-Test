@@ -6,9 +6,10 @@ obj/
 # Node/Frontend
 node_modules/
 dist/
-/build
+build/
 
 # OS/Editor
 .DS_Store
 .vscode/
 *.txt
+*.log
