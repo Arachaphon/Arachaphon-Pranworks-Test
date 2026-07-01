@@ -1,0 +1,46 @@
+<div
+  x-data="apiIntegration()"
+  x-init="loadAll()"
+  class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] sm:p-6"
+>
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+      API Integration — Database Stats
+    </h3>
+    <button
+      @click="loadAll()"
+      class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+      x-text="loading ? 'Loading...' : 'Refresh'"
+    ></button>
+  </div>
+
+  <template x-if="error">
+    <div class="p-3 mb-3 text-sm text-red-600 bg-red-100 rounded-lg">
+      <span x-text="error"></span>
+    </div>
+  </template>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="p-4 bg-blue-50 rounded-xl dark:bg-blue-500/10">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Members</p>
+      <p
+        class="mt-1 text-2xl font-bold text-gray-800 dark:text-white/90"
+        x-text="members.length"
+      >0</p>
+    </div>
+    <div class="p-4 bg-green-50 rounded-xl dark:bg-green-500/10">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Products</p>
+      <p
+        class="mt-1 text-2xl font-bold text-gray-800 dark:text-white/90"
+        x-text="products.length"
+      >0</p>
+    </div>
+    <div class="p-4 bg-purple-50 rounded-xl dark:bg-purple-500/10">
+      <p class="text-sm text-gray-500 dark:text-gray-400">Orders</p>
+      <p
+        class="mt-1 text-2xl font-bold text-gray-800 dark:text-white/90"
+        x-text="orders.length"
+      >0</p>
+    </div>
+  </div>
+</div>

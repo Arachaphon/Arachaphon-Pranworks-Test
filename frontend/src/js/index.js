@@ -14,12 +14,14 @@ import chart03 from "./components/charts/chart-03";
 import map01 from "./components/map-01";
 import studentLocation from "./components/student-location";
 import imageSlider from "./components/image-slider";
+import apiIntegration from "./components/api-integration";
 import "./components/calendar-init.js";
 import "./components/image-resize";
 
 Alpine.plugin(persist);
 Alpine.data("studentLocation", studentLocation);
 Alpine.data("imageSlider", imageSlider);
+Alpine.data("apiIntegration", apiIntegration);
 window.Alpine = Alpine;
 Alpine.start();
 
