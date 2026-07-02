@@ -19,9 +19,17 @@ const studentLocation = () => ({
   accuracy: null,
   map: null,
   marker: null,
+  _destroyed: false,
+  _initRetries: 0,
 
   init() {
+    this._destroyed = false;
     this.getCurrentPosition();
+
+    this.$el.addEventListener("alpine:destroy", () => {
+      this._destroyed = true;
+      this.destroyMap();
+    });
   },
 
   getCurrentPosition() {
@@ -36,10 +44,12 @@ const studentLocation = () => ({
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.lat = position.coords.latitude.toFixed(6);
-        this.lng = position.coords.longitude.toFixed(6);
+        if (this._destroyed) return;
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
         this.accuracy = Math.round(position.coords.accuracy);
         this.loading = false;
+        this._initRetries = 0;
         this.$nextTick(() => this.initMap());
       },
       (err) => {
@@ -60,17 +70,45 @@ const studentLocation = () => ({
   },
 
   refreshLocation() {
+    this.destroyMap();
+    this.getCurrentPosition();
+  },
+
+  destroyMap() {
     if (this.map) {
+      this.map.stop();
+      this.map.off();
       this.map.remove();
       this.map = null;
       this.marker = null;
     }
-    this.getCurrentPosition();
   },
 
   initMap() {
-    this.map = L.map("studentMap", {
+    if (this._destroyed) return;
+    if (this.map) return;
+
+    const el = document.getElementById("studentMap");
+    if (!el) return;
+
+    // BUG เดิม: ถ้า container ยังไม่มีขนาด (สูง/กว้าง = 0 ตอนแรก render)
+    // โค้ดจะ return ทิ้งเฉยๆ และไม่เคยสร้าง map เลย -> หน้าจอเป็นกล่องขาวว่าง
+    // แก้ไข: ให้ retry ด้วย requestAnimationFrame จนกว่า container จะมีขนาดจริง
+    if (el.clientWidth === 0 || el.clientHeight === 0) {
+      if (this._initRetries < 50) { // กันลูปไม่รู้จบ (~50 เฟรม)
+        this._initRetries++;
+        requestAnimationFrame(() => this.initMap());
+      }
+      return;
+    }
+
+    if (this.lat == null || this.lng == null) return;
+
+    this.map = L.map(el, {
       zoomControl: true,
+      zoomAnimation: false,
+      fadeAnimation: false,
+      markerZoomAnimation: false,
     }).setView([this.lat, this.lng], 15);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -82,7 +120,7 @@ const studentLocation = () => ({
     this.marker = L.marker([this.lat, this.lng])
       .addTo(this.map)
       .bindPopup(
-        `<b>คุณอยู่ที่นี่</b><br>ละติจูด: ${this.lat}<br>ลองจิจูด: ${this.lng}`,
+        `<b>คุณอยู่ที่นี่</b><br>ละติจูด: ${this.lat.toFixed(6)}<br>ลองจิจูด: ${this.lng.toFixed(6)}`,
       )
       .openPopup();
 
@@ -93,6 +131,19 @@ const studentLocation = () => ({
       fillOpacity: 0.15,
       weight: 2,
     }).addTo(this.map);
+
+    // เผื่อ container เปลี่ยนขนาดหลัง render (เช่น animation ของ layout framework)
+    requestAnimationFrame(() => {
+      if (this.map) this.map.invalidateSize();
+    });
+    setTimeout(() => {
+      if (this.map) this.map.invalidateSize();
+    }, 300);
+  },
+
+  destroy() {
+    this._destroyed = true;
+    this.destroyMap();
   },
 });
 
